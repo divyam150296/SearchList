@@ -13,14 +13,18 @@ const Search=()=>{
          const reponse =await Axios.get('https://en.wikipedia.org/w/api.php',
          {
              params:{
+                prop:'pageimages|pageterms',
                action:'query',   
                list:'search',
                origin:'*',
                format:'json',
-               srsearch:term,
+               piprop:'thumbnail',
+               srsearch:term
              }, 
-         });
-         setResult(reponse.data.query.search);      
+         })
+         console.log();
+         setResult(reponse.data.query.search);     
+          
      };
      const timeout=setTimeout(()=>{
         if(term)
@@ -37,21 +41,19 @@ const Search=()=>{
         {
         return(
             <div key={result.pageid} className="item">
-                <div className="right floated content">
-                    <a className="ui button" style={{textAlign:'right floated content'}} href={`https://en.wikipedia.org?curid=${result.pageid}`}>Go</a>
+                <div className="right floated content" >
+                    <a className="ui button" style={{textAlign:'right floated content',color:'red'}} href={`https://en.wikipedia.org?curid=${result.pageid}`}>Go</a>
                     </div>
                   <div className="header">
-                    {result.title}<div></div>
+                    {result.title}</div>
                   <span dangerouslySetInnerHTML={{__html:result.snippet}}></span>
                   
                 </div>
-            </div>);
+            );
         }
     );
     return(
         <div className="ui secondary pointing menu">
-          
-        <div>
             <div className='ui form'>
                 <div className='field'>
                     <label>Enter The Search Term</label>
@@ -65,7 +67,6 @@ const Search=()=>{
             <div className="ui celled list">
                 {renderedResult}
             </div>
-        </div>
         </div>
     );
 };
