@@ -41,9 +41,9 @@ const Search=()=>{
                     <a className="ui button" style={{textAlign:'right floated content'}} href={`https://en.wikipedia.org?curid=${result.pageid}`}>Go</a>
                     </div>
                   <div className="header">
-                    {result.title}
+                    {result.title}<div></div>
+                  <span dangerouslySetInnerHTML={{__html:result.snippet}}></span>
                   
-                  {result.snippet}
                 </div>
             </div>);
         }
